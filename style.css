@@ -1,0 +1,47 @@
+
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #cccccc;
+}
+
+.etcSkt-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 0 100px 0;
+    width: 800px;
+    border-radius: 20px;
+    background-color: #ce0c17;
+}
+
+
+.container {
+    border: 1px solid red;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.circle-container {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h2 {
+    color: #ba8325;
+    font-size: 48px;
+    font-style: italic;
+}
+.circle {
+    margin: 0 20px 0 20px;
+    border-radius: 100px;
+    width: 150px;
+    height: 150px;
+    background-color: white;
+    
+}
