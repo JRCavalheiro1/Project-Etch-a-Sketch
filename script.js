@@ -1,50 +1,92 @@
-//input that ask how many grid the user wants to draw
-//reset button
-//color button
-
-const container = document.createElement("div");
 const content = document.querySelector(".content");
+const container = document.querySelector(".container");
+const preset = document.querySelector(".presets");
+const input = document.querySelector("input")
 const buttonInput = document.querySelector(".btn-input");
 const buttonReset = document.querySelector(".btn-reset");
-const input = document.querySelector("input")
+const buttonRandomColor = document.querySelector(".btn-color")
 
-container.className = ".container";
-container.style.display = "flex";
-container.style.flexWrap = "wrap";
-container.style.justifyContent = "center";
+let isRandomColor = false;
+
+//creates square style of grid
+const squareDiv = document.createElement("div");
+squareDiv.className = "square-div";
+squareDiv.style.width = "16px";
+squareDiv.style.height = "16px";
+squareDiv.style.border = "1px solid black";
 
 
-
+//draws the grid in the screen
 function generateGrid(squareAmount) {
+    container.innerHTML = "";
     let grid = squareAmount**2;
-    
-    for(let i=0; i < grid; i++) {
-        const squareDiv = document.createElement("div");
-        squareDiv.style.border = "1px solid black";
-        squareDiv.style.width = "16px";
-        squareDiv.style.height = "16px";
-        squareDiv.style.backgroundColor = "white"
-        
-        squareDiv.addEventListener("mouseenter", () => {
-            squareDiv.style.backgroundColor = "black"
-        }); 
 
-        container.appendChild(squareDiv);
+    for(let i=0; i < grid; i++) {
+        container.appendChild(squareDiv.cloneNode(true));
     }
-    container.style.width = `${16 * squareAmount}px`
+
+    container.style.width = `${16 * squareAmount}px` //adjusts the container width according to the number of squares and their size which is 16px;
+
+    const selectSquares = container.querySelectorAll("div");
+    selectSquares.forEach(item => {
+        item.addEventListener("mouseenter", () => {    
+            isRandomColor ? item.style.backgroundColor = generateRandomColor() : item.style.backgroundColor = "black";
+        });
+    });
+};
+
+function generateRandomColor() {
+    const preColors = "0123456789abcdef";
+    let color = "#";
+
+    for(let i=0; i < 6; i++) {
+        let id = Math.floor(Math.random() * preColors.length);
+        color += `${preColors.charAt(id)}`;
+    }
+   
+    return color;
 }
 
+//BUTTONS FUNCTIONS
 
-
-buttonInput.addEventListener('click', () => {
-    container.innerHTML = ""; 
-    var informGrid = input.value;
+//when the "go button" is pressed it calls the function that draws the grid
+function goButton() {
+    let squares = input.value;
     input.value = "";
-    if(informGrid < 16 || informGrid > 50) {
-        alert("The grid value is outside of range")
+    input.focus();
+    
+    //can't draw a grid beetween this sizes
+    if(squares < 16 || squares > 50) {
+        alert("The amount os squares is outside of the range");
     } else {
-        generateGrid(informGrid);
-        content.appendChild(container);
+        generateGrid(squares); 
+    } 
+};
+
+//resets the drawing on grid
+function resetButton() {
+    const gridDiv = document.querySelectorAll(".square-div");
+    gridDiv.forEach(item => {
+        item.style.backgroundColor = ""
+    });
+};
+
+//select all the preset buttons and add an event handler when clicking
+preset.addEventListener("click", (event)=> {
+    let element = event.target;
+   
+    switch(element.className) {
+        case  "btn-input":
+            goButton();
+        break;
+
+        case "btn-reset":
+            resetButton();
+        break;
+
+        case "btn-color":
+            isRandomColor = !isRandomColor;
+        break;
     }
 })
 
@@ -55,8 +97,6 @@ buttonInput.addEventListener('click', () => {
 
 
 
-
-    
 
 
 
