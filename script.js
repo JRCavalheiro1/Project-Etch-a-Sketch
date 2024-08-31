@@ -11,9 +11,11 @@ let isRandomColor = false;
 //creates square style of grid
 const squareDiv = document.createElement("div");
 squareDiv.className = "square-div";
-squareDiv.style.width = "16px";
-squareDiv.style.height = "16px";
-squareDiv.style.border = "1px solid black";
+squareDiv.style.width = "20px";
+squareDiv.style.height = "20px";
+squareDiv.style.border = "1px solid #4976c5";
+
+
 
 
 //draws the grid in the screen
@@ -25,7 +27,7 @@ function generateGrid(squareAmount) {
         container.appendChild(squareDiv.cloneNode(true));
     }
 
-    container.style.width = `${16 * squareAmount}px` //adjusts the container width according to the number of squares and their size which is 16px;
+    container.style.width = `${20 * squareAmount}px` //adjusts the container width according to the number of squares and their size which is 16px;
 
     const selectSquares = container.querySelectorAll("div");
     selectSquares.forEach(item => {
@@ -56,7 +58,7 @@ function goButton() {
     input.focus();
     
     //can't draw a grid beetween this sizes
-    if(squares < 16 || squares > 50) {
+    if(squares < 16 || squares > 40) {
         alert("The amount os squares is outside of the range");
     } else {
         generateGrid(squares); 
@@ -90,7 +92,7 @@ preset.addEventListener("click", (event)=> {
     }
 })
 
-
+generateGrid(16);
 
 
 
