@@ -15,9 +15,6 @@ squareDiv.style.width = "20px";
 squareDiv.style.height = "20px";
 squareDiv.style.border = "1px solid #4976c5";
 
-
-
-
 //draws the grid in the screen
 function generateGrid(squareAmount) {
     container.innerHTML = "";
@@ -50,7 +47,6 @@ function generateRandomColor() {
 }
 
 //BUTTONS FUNCTIONS
-
 //when the "go button" is pressed it calls the function that draws the grid
 function goButton() {
     let squares = input.value;
@@ -93,13 +89,3 @@ preset.addEventListener("click", (event)=> {
 })
 
 generateGrid(16);
-
-
-
-
-
-
-
-
-
-
